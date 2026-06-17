@@ -63,6 +63,15 @@
     h3{font-size:22px;margin-bottom:10px}
     p{font-size:17px}
 
+    .tag svg,.btn svg,.badge-icon svg,.icon svg,.mini svg,.whats-float svg,.socials svg{width:1em;height:1em;display:block;flex-shrink:0}
+    .icon svg{width:26px;height:26px}
+    .feature .icon svg{width:21px;height:21px}
+    .cta-box .icon svg{width:34px;height:34px}
+    .mini svg{width:23px;height:23px}
+    .whats-float svg{width:28px;height:28px}
+    .socials svg{width:20px;height:20px}
+
+
     /* Header */
     .header{
       position:fixed;top:0;left:0;right:0;z-index:50;
@@ -264,15 +273,20 @@
     .person strong{display:block;color:var(--black)}
     .person small{color:var(--muted)}
 
-    /* Location */
-    .location-box{display:grid;grid-template-columns:.95fr 1.55fr;background:var(--light);border-radius:30px;overflow:hidden;border:1px solid var(--border);box-shadow:0 10px 30px rgba(16,24,40,.04)}
-    .location-info{padding:38px}
-    .info-item{display:flex;gap:14px;margin:22px 0}
-    .info-item .mini{font-size:22px;color:var(--blue);flex-shrink:0}
-    .info-item h3{font-size:18px}
+    /* Units / Location */
+    .units-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;align-items:stretch}
+    .unit-card{background:var(--light);border:1px solid var(--border);border-radius:30px;overflow:hidden;box-shadow:0 10px 30px rgba(16,24,40,.04);height:100%;display:flex;flex-direction:column}
+    .unit-info{padding:32px;flex:1}
+    .unit-badge{display:inline-flex;align-items:center;gap:8px;background:#EEF7FF;color:#1D84C6;border:1px solid #D8EEFF;padding:7px 10px;border-radius:999px;font-size:13px;font-weight:900;margin-bottom:14px}
+    .unit-badge svg{width:16px;height:16px}
+    .info-item{display:flex;gap:14px;margin:18px 0}
+    .info-item .mini{font-size:22px;color:var(--blue);flex-shrink:0;width:26px;display:grid;place-items:start center;padding-top:2px}
+    .info-item h3{font-size:17px;margin-bottom:4px}
     .info-item p{font-size:15px;color:#667085}
-    .map{min-height:420px;background:#DEE6F0}
-    .map iframe{width:100%;height:100%;min-height:420px;border:0;display:block}
+    .unit-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+    .unit-actions .btn{flex:1;min-width:170px;padding:13px 16px}
+    .map{min-height:310px;background:#DEE6F0;border-top:1px solid var(--border)}
+    .map iframe{width:100%;height:100%;min-height:310px;border:0;display:block}
 
     /* Footer */
     footer{background:#101828;color:#fff;padding:60px 0 28px}
@@ -294,12 +308,12 @@
     @media (max-width: 900px){
       .menu{display:none}.menu-btn{display:block}.mobile-menu.open{display:block}
       .nav{height:72px}.logo img{height:42px;max-width:155px}
-      .hero{padding:112px 0 56px}.hero-grid,.two-col,.location-box{grid-template-columns:1fr;gap:36px}
+      .hero{padding:112px 0 56px}.hero-grid,.two-col{grid-template-columns:1fr;gap:36px}.units-grid{grid-template-columns:1fr}
       .hero-copy{text-align:center}.hero-copy>p{font-size:18px;margin-left:auto;margin-right:auto}
       .hero-actions{justify-content:center}.patients-row{justify-content:center;flex-wrap:wrap;text-align:left}
       .floating-badge{left:12px;bottom:12px;transform:scale(.92);transform-origin:left bottom}
       .section{padding:64px 0}.grid-3{grid-template-columns:1fr 1fr}.results-wrap{grid-template-columns:1fr;padding:22px}.footer-grid{grid-template-columns:1fr 1fr}
-      .location-info{padding:30px}.map{min-height:340px}.map iframe{min-height:340px}
+      .unit-info{padding:30px}.map{min-height:340px}.map iframe{min-height:340px}
     }
 
     @media (max-width: 560px){
@@ -310,7 +324,7 @@
       .hero-card{border-radius:22px}.hero-card img{border-radius:16px;aspect-ratio:1/1;object-position:center}
       .floating-badge{position:static;margin:12px auto 0;width:max-content;max-width:100%;transform:none;padding:11px 14px}
       .grid-3{grid-template-columns:1fr}.card{padding:24px}.results-wrap{padding:16px;border-radius:24px}.compare-card{aspect-ratio:1.55/1;border-radius:18px}.compare-handle{width:42px;height:42px}.compare-label{font-size:10px;padding:6px 8px}.cta-box{padding:28px}.footer-grid{grid-template-columns:1fr}.copyright{display:block}.copyright span{display:block;margin-top:8px}
-      .about-img{max-width:360px}.location-info{padding:24px}.map,.map iframe{min-height:300px}
+      .about-img{max-width:360px}.unit-info{padding:24px}.map,.map iframe{min-height:300px}
       .whats-float{width:54px;height:54px;font-size:24px;right:14px;bottom:14px}
     }
   </style>
@@ -320,14 +334,14 @@
     <div class="container nav">
       <a href="#inicio" class="logo" aria-label="OHDONTO início"><img src="./LOGO-MENU.png" alt="OHDONTO!" /></a>
       <nav class="menu" aria-label="Menu principal">
-        <a href="#inicio">Início</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#resultados">Resultados</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#localizacao">Localização</a>
-        <a class="btn btn-primary" href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar avaliação</a>
+        <a href="#inicio">Início</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#resultados">Resultados</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#localizacao">Unidades</a>
+        <a class="btn btn-primary" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-5"/></svg> Escolher unidade</a>
       </nav>
       <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
-      <a href="#inicio">Início</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#resultados">Resultados</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#localizacao">Localização</a>
-      <a class="btn btn-primary" href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar avaliação agora</a>
+      <a href="#inicio">Início</a><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#resultados">Resultados</a><a href="#diferenciais">Diferenciais</a><a href="#depoimentos">Depoimentos</a><a href="#localizacao">Unidades</a>
+      <a class="btn btn-primary" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-5"/></svg> Escolher unidade</a>
     </div>
   </header>
 
@@ -335,12 +349,12 @@
     <section class="hero" id="inicio">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <span class="tag">📍 São Sebastião & Brazlândia, DF</span>
+          <span class="tag"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg> São Sebastião & Brazlândia, DF</span>
           <h1>Transforme seu sorriso e eleve sua <span class="gradient-text">autoestima</span> com a OHDONTO!</h1>
           <p>Atendimento odontológico humanizado, com foco em saúde, estética e confiança para o seu sorriso. Cuidado personalizado para cada fase da sua vida.</p>
           <div class="hero-actions">
-            <a class="btn btn-whatsapp" href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">WhatsApp</a>
-            <a class="btn btn-secondary" href="#servicos">Conheça os serviços</a>
+            <a class="btn btn-whatsapp" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.9 11.9 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.7 1.5h.1A11.9 11.9 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4ZM12.1 21.8h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2 9.9 9.9 0 1 1 10 9.9Zm5.4-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.3 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg> Escolher unidade</a>
+            <a class="btn btn-secondary" href="#servicos">Conheça os serviços <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
           </div>
           <div class="patients-row">
             <div class="patient-stack" aria-label="Pacientes OHDONTO">
@@ -353,7 +367,7 @@
         </div>
         <div class="hero-card">
           <img src="./HERO.png" alt="Profissional realizando atendimento odontológico" />
-          <div class="floating-badge"><span class="badge-icon">🦷</span><div>Avaliação<small>Personalizada</small></div></div>
+          <div class="floating-badge"><span class="badge-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 3.5c1.8 0 2.6 1.1 4.5 1.1s2.7-1.1 4.5-1.1C19.1 3.5 21 5.6 21 8.4c0 2.7-1.4 5.2-2.1 7.6-.6 2.2-.9 4.5-2.6 4.5-1.8 0-1.5-4.4-4.3-4.4s-2.5 4.4-4.3 4.4c-1.7 0-2-2.3-2.6-4.5C4.4 13.6 3 11.1 3 8.4c0-2.8 1.9-4.9 4.5-4.9Z"/></svg></span><div>Avaliação<small>Personalizada</small></div></div>
         </div>
       </div>
     </section>
@@ -380,12 +394,12 @@
           <p>Oferecemos soluções odontológicas para devolver função, estética e segurança ao seu sorriso.</p>
         </div>
         <div class="grid-3">
-          <article class="card"><div class="icon">🩺</div><h3>Avaliação Odontológica</h3><p>Diagnóstico completo e planejamento adequado para você.</p><a href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20odontol%C3%B3gica." target="_blank" rel="noopener">Agendar avaliação →</a></article>
-          <article class="card highlight"><div class="icon violet">🦷</div><h3>Implante Dentário</h3><p>Recupere a segurança ao sorrir e mastigar com naturalidade.</p><a href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20Implante%20Dent%C3%A1rio." target="_blank" rel="noopener">Agendar avaliação →</a></article>
-          <article class="card"><div class="icon">✨</div><h3>Limpeza e Prevenção</h3><p>Manutenção essencial para saúde gengival e prevenção de cáries.</p><a href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20limpeza." target="_blank" rel="noopener">Agendar avaliação →</a></article>
-          <article class="card"><div class="icon violet">😁</div><h3>Clareamento Dental</h3><p>Ilumine seu sorriso de forma segura e profissional.</p><a href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20clareamento%20dental." target="_blank" rel="noopener">Agendar avaliação →</a></article>
-          <article class="card"><div class="icon">🛠️</div><h3>Restaurações Estéticas</h3><p>Reparo de dentes danificados com acabamento natural.</p><a href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20preciso%20fazer%20uma%20avalia%C3%A7%C3%A3o%20para%20restaura%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar avaliação →</a></article>
-          <article class="card"><div class="icon violet">⭐</div><h3>Planejamento do Sorriso</h3><p>Soluções integradas para harmonizar estética, saúde e confiança.</p><a href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20sobre%20tratamentos%20est%C3%A9ticos." target="_blank" rel="noopener">Agendar avaliação →</a></article>
+          <article class="card"><div class="icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v5a4 4 0 0 0 8 0V3"/><path d="M10 14v2a4 4 0 0 0 8 0v-3"/><circle cx="20" cy="10" r="2"/><path d="M4 3h4M12 3h4"/></svg></div><h3>Avaliação Odontológica</h3><p>Diagnóstico completo e planejamento adequado para você.</p><a href="#localizacao">Escolher unidade →</a></article>
+          <article class="card highlight"><div class="icon violet"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.5 3.5c1.8 0 2.6 1.1 4.5 1.1s2.7-1.1 4.5-1.1C19.1 3.5 21 5.6 21 8.4c0 2.7-1.4 5.2-2.1 7.6-.6 2.2-.9 4.5-2.6 4.5-1.8 0-1.5-4.4-4.3-4.4s-2.5 4.4-4.3 4.4c-1.7 0-2-2.3-2.6-4.5C4.4 13.6 3 11.1 3 8.4c0-2.8 1.9-4.9 4.5-4.9Z"/></svg></div><h3>Implante Dentário</h3><p>Recupere a segurança ao sorrir e mastigar com naturalidade.</p><a href="#localizacao">Escolher unidade →</a></article>
+          <article class="card"><div class="icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"/></svg></div><h3>Limpeza e Prevenção</h3><p>Manutenção essencial para saúde gengival e prevenção de cáries.</p><a href="#localizacao">Escolher unidade →</a></article>
+          <article class="card"><div class="icon violet"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.3 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></div><h3>Clareamento Dental</h3><p>Ilumine seu sorriso de forma segura e profissional.</p><a href="#localizacao">Escolher unidade →</a></article>
+          <article class="card"><div class="icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.8 17.2a2 2 0 1 0 3 3l5.5-5.5a4 4 0 0 0 5.4-5.4l-2.6 2.6-3-3 2.6-2.6Z"/></svg></div><h3>Restaurações Estéticas</h3><p>Reparo de dentes danificados com acabamento natural.</p><a href="#localizacao">Escolher unidade →</a></article>
+          <article class="card"><div class="icon violet"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"/></svg></div><h3>Planejamento do Sorriso</h3><p>Soluções integradas para harmonizar estética, saúde e confiança.</p><a href="#localizacao">Escolher unidade →</a></article>
         </div>
       </div>
     </section>
@@ -423,7 +437,7 @@
             <p class="result-note">Resultado ilustrativo de caso real. Cada paciente possui necessidades específicas, e os resultados podem variar conforme avaliação profissional.</p>
 
             <div style="margin-top:22px">
-              <a class="btn btn-whatsapp" href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vi%20o%20antes%20e%20depois%20no%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Quero avaliar meu sorriso</a>
+              <a class="btn btn-whatsapp" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.9 11.9 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.7 1.5h.1A11.9 11.9 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4ZM12.1 21.8h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2 9.9 9.9 0 1 1 10 9.9Zm5.4-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.3 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg> Quero avaliar meu sorriso</a>
             </div>
           </div>
         </div>
@@ -436,16 +450,16 @@
         <div>
           <div class="eyebrow" style="color:#1D84C6">Por que escolher a OHDONTO?</div>
           <h2>Cuidado que vai além da cadeira do dentista.</h2>
-          <div class="feature"><div class="icon">💙</div><div><h3>Atendimento Humanizado</h3><p>Tratamos pacientes, não apenas dentes. Ouvimos suas expectativas e medos.</p></div></div>
-          <div class="feature"><div class="icon violet">📋</div><div><h3>Avaliação Personalizada</h3><p>Cada sorriso é único. Planejamos considerando sua necessidade e realidade.</p></div></div>
-          <div class="feature"><div class="icon">💬</div><div><h3>Comunicação Clara</h3><p>Explicamos cada etapa do procedimento de forma simples e transparente.</p></div></div>
-          <div class="feature"><div class="icon violet">📍</div><div><h3>Localização Acessível</h3><p>Com unidades em São Sebastião e atendimento em Brazlândia, estamos perto de você.</p></div></div>
+          <div class="feature"><div class="icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg></div><div><h3>Atendimento Humanizado</h3><p>Tratamos pacientes, não apenas dentes. Ouvimos suas expectativas e medos.</p></div></div>
+          <div class="feature"><div class="icon violet"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4a3 3 0 0 1 6 0"/><path d="M9 9h6M9 13h6M9 17h4"/></svg></div><div><h3>Avaliação Personalizada</h3><p>Cada sorriso é único. Planejamos considerando sua necessidade e realidade.</p></div></div>
+          <div class="feature"><div class="icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-6a8 8 0 1 1 18-5Z"/><path d="M8 10h8M8 14h5"/></svg></div><div><h3>Comunicação Clara</h3><p>Explicamos cada etapa do procedimento de forma simples e transparente.</p></div></div>
+          <div class="feature"><div class="icon violet"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div><h3>Localização Acessível</h3><p>Com unidades em São Sebastião e atendimento em Brazlândia, estamos perto de você.</p></div></div>
         </div>
         <div class="cta-box">
-          <div class="icon violet">📅</div>
+          <div class="icon violet"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-5"/></svg></div>
           <h2>Facilidade no agendamento</h2>
           <p>Nossa equipe está pronta para responder rapidamente via WhatsApp. Tire dúvidas iniciais e marque seu horário sem complicação.</p>
-          <a class="btn btn-primary" href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Falar com a recepção</a>
+          <a class="btn btn-primary" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-5"/></svg> Escolher unidade</a>
         </div>
       </div>
     </section>
@@ -454,7 +468,7 @@
       <div class="container">
         <h2>Seu novo sorriso pode começar com uma avaliação.</h2>
         <p>Dê o primeiro passo para elevar sua autoestima e cuidar da sua saúde bucal com profissionais que se importam.</p>
-        <a class="btn" href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Agendar minha avaliação</a>
+        <a class="btn" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-5"/></svg> Escolher unidade</a>
       </div>
     </section>
 
@@ -470,17 +484,47 @@
     </section>
 
     <section class="section" id="localizacao">
-      <div class="container location-box">
-        <div class="location-info">
-          <div class="eyebrow">Onde estamos</div>
-          <h2>Visite a OHDONTO!</h2>
-          <div class="info-item"><div class="mini">📍</div><div><h3>Unidade São Sebastião</h3><p>Av. Comercial, 2101 - Sala 02<br>São Sebastião, Brasília - DF<br>CEP: 71691-083</p></div></div>
-          <div class="info-item"><div class="mini">🕒</div><div><h3>Horário de funcionamento</h3><p>Segunda a sexta: 08:00 às 18:00<br>Sábado: 08:00 às 12:00<br>Domingo: Fechado</p></div></div>
-          <div class="info-item"><div class="mini">☎️</div><div><h3>Contato</h3><p>(61) 98128-5167</p></div></div>
-          <a class="btn btn-secondary" href="https://maps.google.com/?q=Av.%20Comercial,%202101%20Sala%2002%20S%C3%A3o%20Sebasti%C3%A3o%20Bras%C3%ADlia%20DF" target="_blank" rel="noopener">Como chegar no Maps</a>
+      <div class="container">
+        <div class="section-title">
+          <div class="eyebrow">Nossas unidades</div>
+          <h2>Escolha a unidade mais próxima de você</h2>
+          <p>A OHDONTO atende em São Sebastião e Brazlândia, com WhatsApp específico para cada unidade.</p>
         </div>
-        <div class="map">
-          <iframe title="Mapa OHDONTO São Sebastião" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Av.%20Comercial,%202101%20Sala%2002%20S%C3%A3o%20Sebasti%C3%A3o%20Bras%C3%ADlia%20DF&output=embed"></iframe>
+
+        <div class="units-grid">
+          <article class="unit-card">
+            <div class="unit-info">
+              <span class="unit-badge"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg> Unidade São Sebastião</span>
+              <h3>OHDONTO São Sebastião</h3>
+              <div class="info-item"><div class="mini"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div><h3>Endereço</h3><p>Av. Comercial, 2101 - Sala 02<br>São Sebastião, Brasília - DF<br>CEP: 71691-083</p></div></div>
+              <div class="info-item"><div class="mini"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Horário de funcionamento</h3><p>Segunda a sexta: 08:00 às 18:00<br>Sábado: 08:00 às 12:00<br>Domingo: Fechado</p></div></div>
+              <div class="info-item"><div class="mini"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg></div><div><h3>WhatsApp</h3><p>(61) 98128-5167</p></div></div>
+              <div class="unit-actions">
+                <a class="btn btn-whatsapp" href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20unidade%20S%C3%A3o%20Sebasti%C3%A3o." target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.9 11.9 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.7 1.5h.1A11.9 11.9 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4ZM12.1 21.8h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2 9.9 9.9 0 1 1 10 9.9Zm5.4-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.3 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg> Agendar em São Sebastião</a>
+                <a class="btn btn-secondary" href="https://maps.google.com/?q=Av.%20Comercial,%202101%20Sala%2002%20S%C3%A3o%20Sebasti%C3%A3o%20Bras%C3%ADlia%20DF" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg> Como chegar</a>
+              </div>
+            </div>
+            <div class="map">
+              <iframe title="Mapa OHDONTO São Sebastião" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/?q=Av.%20Comercial,%202101%20Sala%2002%20S%C3%A3o%20Sebasti%C3%A3o%20Bras%C3%ADlia%20DF&output=embed"></iframe>
+            </div>
+          </article>
+
+          <article class="unit-card">
+            <div class="unit-info">
+              <span class="unit-badge"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg> Unidade Brazlândia</span>
+              <h3>OHDONTO Brazlândia</h3>
+              <div class="info-item"><div class="mini"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div><h3>Endereço</h3><p>St. Norte Q 8, Lt 55A - Sobreloja<br>Brazlândia, Brasília - DF</p></div></div>
+              <div class="info-item"><div class="mini"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><h3>Horário de funcionamento</h3><p>Segunda a sexta: 08:00 às 18:00<br>Sábado: 08:00 às 12:00<br>Domingo: Fechado</p></div></div>
+              <div class="info-item"><div class="mini"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"/></svg></div><div><h3>WhatsApp</h3><p>(61) 99695-3369</p></div></div>
+              <div class="unit-actions">
+                <a class="btn btn-whatsapp" href="https://wa.me/5561996953369?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20unidade%20Brazl%C3%A2ndia." target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.9 11.9 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.7 1.5h.1A11.9 11.9 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4ZM12.1 21.8h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2 9.9 9.9 0 1 1 10 9.9Zm5.4-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.3 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg> Agendar em Brazlândia</a>
+                <a class="btn btn-secondary" href="https://maps.google.com/?q=St.%20Norte%20Q%208%20Lt%2055A%20Sobreloja%20Brazl%C3%A2ndia%20Bras%C3%ADlia%20DF" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg> Como chegar</a>
+              </div>
+            </div>
+            <div class="map">
+              <iframe title="Mapa OHDONTO Brazlândia" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/?q=St.%20Norte%20Q%208%20Lt%2055A%20Sobreloja%20Brazl%C3%A2ndia%20Bras%C3%ADlia%20DF&output=embed"></iframe>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -489,16 +533,16 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div><div class="footer-logo"><img src="./LOGO-MENU.png" alt="OHDONTO!" /></div><p>Eleve sua autoestima através da Odontologia! Cuidado humanizado e conforto para o seu sorriso.</p><div class="socials"><a href="https://instagram.com/ohdonto_" target="_blank" rel="noopener">IG</a><a href="https://wa.me/5561981285167" target="_blank" rel="noopener">W</a></div></div>
+        <div><div class="footer-logo"><img src="./LOGO-MENU.png" alt="OHDONTO!" /></div><p>Eleve sua autoestima através da Odontologia! Cuidado humanizado e conforto para o seu sorriso.</p><div class="socials"><a href="https://instagram.com/ohdonto_" target="_blank" rel="noopener" aria-label="Instagram OHDONTO"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a><a href="#localizacao" aria-label="Escolher unidade no WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.9 11.9 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.7 1.5h.1A11.9 11.9 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4ZM12.1 21.8h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2 9.9 9.9 0 1 1 10 9.9Zm5.4-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.3 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg></a></div></div>
         <div><h3>Links rápidos</h3><ul><li><a href="#inicio">Início</a></li><li><a href="#sobre">Sobre</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#diferenciais">Diferenciais</a></li><li><a href="#depoimentos">Depoimentos</a></li></ul></div>
-        <div><h3>Contato</h3><ul><li><a href="https://wa.me/5561981285167" target="_blank" rel="noopener">(61) 98128-5167</a></li><li>Av. Comercial, 2101 - Sala 02<br>São Sebastião, Brasília - DF</li><li>Atendimento também em Brazlândia</li></ul></div>
+        <div><h3>Contato</h3><ul><li><strong>São Sebastião:</strong><br><a href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20unidade%20S%C3%A3o%20Sebasti%C3%A3o." target="_blank" rel="noopener">(61) 98128-5167</a></li><li><strong>Brazlândia:</strong><br><a href="https://wa.me/5561996953369?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20unidade%20Brazl%C3%A2ndia." target="_blank" rel="noopener">(61) 99695-3369</a></li><li>Unidades em São Sebastião e Brazlândia - DF</li></ul></div>
         <div><h3>Horários</h3><ul><li>Seg - Sex: 08:00 - 18:00</li><li>Sábado: 08:00 - 12:00</li><li>Domingo: Fechado</li></ul></div>
       </div>
       <div class="copyright"><span>© <span id="year"></span> OHDONTO! Clínica Odontológica. Todos os direitos reservados.</span><span>Responsável Técnico: Dr. [Inserir Nome e CRO]</span></div>
     </div>
   </footer>
 
-  <a class="whats-float" href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">W</a>
+  <a class="whats-float" href="#localizacao" aria-label="Escolher unidade para falar no WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.9 11.9 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.7 1.5h.1A11.9 11.9 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4ZM12.1 21.8h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2 9.9 9.9 0 1 1 10 9.9Zm5.4-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.3 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg></a>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
