@@ -80,9 +80,9 @@
     }
     .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
     .logo img{height:46px;width:auto;max-width:170px;object-fit:contain}
-    .menu{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:700;color:#344054}
+    .menu{display:flex;align-items:center;gap:18px;font-size:13px;font-weight:800;color:#344054;white-space:nowrap}
     .menu a:hover{color:var(--violet)}
-    .menu .btn{padding:11px 16px;min-height:42px;color:#fff}
+    .menu .btn{padding:10px 14px;min-height:40px;color:#fff;font-size:13px}
     .menu-btn{display:none;background:none;border:0;font-size:30px;color:var(--black);padding:8px;cursor:pointer}
     .mobile-menu{display:none;background:#fff;border-top:1px solid var(--border);padding:8px 16px 18px;box-shadow:0 15px 30px rgba(16,24,40,.08)}
     .mobile-menu a{display:block;padding:13px 8px;border-radius:12px;font-weight:700;color:#344054}
@@ -306,8 +306,9 @@
     @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.45)}70%{box-shadow:0 0 0 14px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
 
     @media (max-width: 900px){
-      .menu{display:flex;gap:0}.menu-btn{display:none}.mobile-menu.open{display:none}
       .nav{height:72px}.logo img{height:42px;max-width:155px}
+      .menu{gap:9px;font-size:12px}
+      .menu .btn{padding:9px 11px;font-size:12px}
       .hero{padding:112px 0 56px}.hero-grid,.two-col{grid-template-columns:1fr;gap:36px}.units-grid{grid-template-columns:1fr}
       .hero-copy{text-align:center}.hero-copy>p{font-size:18px;margin-left:auto;margin-right:auto}
       .hero-actions{justify-content:center}.patients-row{justify-content:center;flex-wrap:wrap;text-align:left}
@@ -316,9 +317,16 @@
       .unit-info{padding:30px}.map{min-height:340px}.map iframe{min-height:340px}
     }
 
+    @media (max-width: 768px){
+      .menu{display:none}
+      .menu-btn{display:block}
+      .mobile-menu.open{display:block}
+    }
+
+
     @media (max-width: 560px){
       .container{width:min(100% - 24px, 1120px)}
-      .nav{gap:10px}.logo img{height:38px;max-width:135px}.menu .btn{width:auto;min-height:40px;padding:10px 12px;font-size:12px;border-radius:14px;gap:7px}.menu .btn svg{width:14px;height:14px}
+      .nav{gap:10px}.logo img{height:38px;max-width:135px}.menu-btn{font-size:28px}
       h1{font-size:36px;line-height:1.04}h2{font-size:30px}.hero-copy>p,p{font-size:16px}
       .hero-actions{flex-direction:column}.btn{width:100%;padding:14px 18px}
       .patients-row{gap:10px;font-size:14px;justify-content:center}.patient-stack img{width:40px;height:40px}
@@ -335,12 +343,26 @@
     <div class="container nav">
       <a href="#inicio" class="logo" aria-label="OHDONTO início"><img src="./LOGO-MENU.png" alt="OHDONTO!" /></a>
       <nav class="menu" aria-label="Menu principal">
-        <a class="btn btn-primary" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-5"/></svg> Agendar avaliação</a>
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#resultados">Resultados</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#localizacao">Localização</a>
+        <a class="btn btn-primary" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-5"/></svg> Agende Sua Consulta</a>
       </nav>
       <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
     </div>
     <div class="mobile-menu" id="mobileMenu">
-      <a class="btn btn-primary" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-5"/></svg> Agendar avaliação</a>
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#diferenciais">Diferenciais</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#localizacao">Localização</a>
+      <a class="btn btn-primary" href="#localizacao"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-5"/></svg> Agende Sua Consulta</a>
     </div>
   </header>
 
@@ -533,7 +555,7 @@
     <div class="container">
       <div class="footer-grid">
         <div><div class="footer-logo"><img src="./LOGO-MENU.png" alt="OHDONTO!" /></div><p>Eleve sua autoestima através da Odontologia! Cuidado humanizado e conforto para o seu sorriso.</p><div class="socials"><a href="https://instagram.com/ohdonto_" target="_blank" rel="noopener" aria-label="Instagram OHDONTO"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a><a href="#localizacao" aria-label="Agendar avaliação pelo WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.9 11.9 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.7 1.5h.1A11.9 11.9 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4ZM12.1 21.8h-.1a9.8 9.8 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 0 1-1.5-5.2 9.9 9.9 0 1 1 10 9.9Zm5.4-7.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.6c.2.3 2.4 3.7 5.9 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg></a></div></div>
-        <div><h3>Links rápidos</h3><ul><li><a href="#inicio">Início</a></li><li><a href="#sobre">Sobre</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#diferenciais">Diferenciais</a></li><li><a href="#depoimentos">Depoimentos</a></li></ul></div>
+        <div><h3>Links rápidos</h3><ul><li><a href="#inicio">Início</a></li><li><a href="#sobre">Sobre</a></li><li><a href="#servicos">Serviços</a></li><li><a href="#resultados">Resultados</a></li><li><a href="#diferenciais">Diferenciais</a></li><li><a href="#depoimentos">Depoimentos</a></li><li><a href="#localizacao">Localização</a></li></ul></div>
         <div><h3>Contato</h3><ul><li><strong>São Sebastião:</strong><br><a href="https://wa.me/5561981285167?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20unidade%20S%C3%A3o%20Sebasti%C3%A3o." target="_blank" rel="noopener">(61) 98128-5167</a></li><li><strong>Brazlândia:</strong><br><a href="https://wa.me/5561996953369?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20OHDONTO%20e%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o%20na%20unidade%20Brazl%C3%A2ndia." target="_blank" rel="noopener">(61) 99695-3369</a></li><li>Unidades em São Sebastião e Brazlândia - DF</li></ul></div>
         <div><h3>Horários</h3><ul><li>Seg - Sex: 08:00 - 18:00</li><li>Sábado: 08:00 - 12:00</li><li>Domingo: Fechado</li></ul></div>
       </div>
